@@ -6,10 +6,10 @@ For development, be sure to set up ESLint as your default formatter.
 
 # ROADMAP:
 
-- read up on and choose Tailwind or vanilla-extract
+- ~~read up on and choose Tailwind or vanilla-extract~~
+- ~~define colour palette (test contrast a11y)~~
+- ~~code palette~~
 - read up on weather API
-- define colour palette (test contrast a11y)
-- code palette
 - define happy path UI
 - errors in UI - where are they shown?
 - loading state - how will I show it?

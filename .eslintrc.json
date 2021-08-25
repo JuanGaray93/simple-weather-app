@@ -18,9 +18,10 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "indent": ["error", 2],
+    "@typescript-eslint/indent": ["error", 2], // "indent" breaks the linter, use typescript-eslint version instead
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "react/prop-types": 0
   }
 }

@@ -1,11 +1,10 @@
-import React  from "react"; 
-import "./App.css";
+import React from "react";
 
-const App: React.FC = () => { 
-
+const App: React.FC = () => {
   return (
-    <div className="App">
-       asdsa
+    <div className="h-screen flex flex-col bg-lavenderWeb ">
+      <h1 className="h-20 text-5xl bg-queenPink p-4">Weather</h1>
+      <main className="p-4">Asdasdsad</main>
     </div>
   );
 };
