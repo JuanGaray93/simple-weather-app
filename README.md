@@ -9,14 +9,14 @@ For development, be sure to set up ESLint as your default formatter.
 - ~~read up on and choose Tailwind or vanilla-extract~~
 - ~~define colour palette (test contrast a11y)~~
 - ~~code palette~~
-- read up on weather API
+- ~~define 5 cities in-code as select options~~
+- ~~read up on weather API~~
 - define happy path UI
 - errors in UI - where are they shown?
 - loading state - how will I show it?
 - document
 - code the design
 - test responsive design
-- define 5 cities in-code as select options
 - curr city is also an option
 - create api request
 - code results on state - error, weather, loading
