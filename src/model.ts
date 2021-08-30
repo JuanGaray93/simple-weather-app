@@ -13,3 +13,10 @@ export const cityToName: Record<City, string> = {
   [City.SanFernando]: "San Fernando",
   [City.SaoPaulo]: "São Paulo",
 };
+
+interface CityData {}
+
+export type AppState = {
+  currCity?: City;
+  dataFetchState?: "error" | CityData;
+};

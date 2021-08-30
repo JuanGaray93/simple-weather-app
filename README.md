@@ -2,7 +2,7 @@ This project was bootstrapped with [Vite](https://vitejs.dev/). Vite requires No
 
 To run the project, simply open a terminal in the project root folder and run `npm install` and then `npm run dev`.
 
-For development, be sure to set up ESLint as your default formatter.
+For development, be sure to set up ESLint as your default formatter in your text editor.
 
 # ROADMAP:
 
@@ -11,17 +11,21 @@ For development, be sure to set up ESLint as your default formatter.
 - ~~code palette~~
 - ~~define 5 cities in-code as select options~~
 - ~~read up on weather API~~
-- define happy path UI
-- errors in UI - where are they shown?
-- loading state - how will I show it?
+- ~~errors in UI - where are they shown?~~
+- ~~loading state - how will I show it?~~
+- ~~curr city is also an option~~
+- ~~code results on state - error, weather, loading··
+- ~~define happy path UI~~
+- define environment variables
+- create api request
+- integrate
 - document
 - code the design
 - test responsive design
-- curr city is also an option
-- create api request
-- code results on state - error, weather, loading
-- integrate
-- change favicon
-- change theme
 - re-test responsive design
 - test a11y
+
+## NTH:
+
+- change favicon
+- change theme

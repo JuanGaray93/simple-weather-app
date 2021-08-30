@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { City, cityToName } from "./cities";
+import { City, cityToName } from "./model";
 
 interface Props {
   onChangeCity: (city?: City) => void;
+  loading: boolean;
 }
 
 // Not entirely proud of the type conversions in this component
 // I could've used a Select library but I preferred to keep it as close to HTML as possible
-export const CitySelect: React.FC<Props> = ({ onChangeCity }) => {
+export const CitySelect: React.FC<Props> = ({ onChangeCity, loading }) => {
   const [value, setValue] = useState<City | undefined>(undefined);
   const handleSelectCity = (newCity?: City) => {
     onChangeCity(newCity);
@@ -22,6 +23,7 @@ export const CitySelect: React.FC<Props> = ({ onChangeCity }) => {
       value={value}
       onChange={(e) => handleSelectCity(eventValueToCity(e.target.value))}
       name="cities"
+      disabled={loading}
     >
       <option value="">Ciudad actual</option>
       {Object.keys(City).map((cityKey) => {
