@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CitySelect } from "./CitySelect";
-import { AppError, AppState, CityId, errorToStr } from "./model";
+import { AppError, AppState, errorToStr } from "./model/app";
+import { CityId } from "./model/openWeather";
 import { getLocationForecast } from "./requests";
 
 export const App: React.FC = () => {

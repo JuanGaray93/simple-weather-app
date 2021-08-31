@@ -1,9 +1,9 @@
 import {
-  CityId,
   Coordinates,
   locationIdentifierIsCoordinates,
   LocationIdentifier,
-} from "./model";
+} from "./model/app";
+import { CityForecast, CityId } from "./model/openWeather";
 
 const castEnvVarToStr = (apiKey?: string | boolean) => {
   if (typeof apiKey === "boolean") return "";
@@ -26,7 +26,7 @@ interface OpenWeatherCityIdUrlParams {
 const buildOpenWeatherCityIdUrl = (
   params: OpenWeatherCityIdUrlParams
 ): string =>
-  `${BASE_OPENWEATHER_URL}?id=${params.cityId}&cnt=${params.count}&appid=${params.appId}`;
+  `${BASE_OPENWEATHER_URL}?id=${params.cityId}&cnt=${params.count}&appid=${params.appId}&units=metric`;
 
 type OpenWeatherCoordinatesUrlParams = Coordinates & {
   count: number; // from 1 to 16
@@ -35,7 +35,7 @@ type OpenWeatherCoordinatesUrlParams = Coordinates & {
 const buildOpenWeatherGeographicCoordinatesUrl = (
   params: OpenWeatherCoordinatesUrlParams
 ): string =>
-  `${BASE_OPENWEATHER_URL}?lat=${params.lat}&lon=${params.lon}&cnt=${params.count}&appid=${params.appId}`;
+  `${BASE_OPENWEATHER_URL}?lat=${params.lat}&lon=${params.lon}&cnt=${params.count}&appid=${params.appId}&units=metric`;
 
 const buildRequestParamByLocation = (location: LocationIdentifier): string => {
   if (locationIdentifierIsCoordinates(location))
@@ -51,7 +51,24 @@ const buildRequestParamByLocation = (location: LocationIdentifier): string => {
   });
 };
 
-export const getLocationForecast = async (params: LocationIdentifier) => {
+/** @todo */
+export const getLocationForecast = async (
+  params: LocationIdentifier
+): Promise<CityForecast> => {
   const requestUrl: string = buildRequestParamByLocation(params);
-  return {};
+  return {
+    list: [
+      {
+        temp: {
+          day: 123,
+          max: 125,
+          min: 1,
+        },
+        weather: {
+          icon: "asd",
+          id: 800,
+        },
+      },
+    ],
+  };
 };

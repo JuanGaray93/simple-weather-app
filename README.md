@@ -16,7 +16,7 @@ For development, be sure to set up ESLint as your default formatter in your text
 - ~~curr city is also an option~~
 - ~~code results on state - error, weather, loading··
 - ~~define happy path UI~~
-- define environment variables
+- ~~define environment variables~~
 - create api request
 - integrate
 - document

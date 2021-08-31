@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CityId, cityIdToName } from "./model";
+import { CityId, cityIdToName } from "./model/openWeather";
 
 interface Props {
   onChangeCity: (city?: CityId) => void;
