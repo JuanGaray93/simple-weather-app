@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { City, cityToName } from "./model";
+import { CityId, cityIdToName } from "./model";
 
 interface Props {
-  onChangeCity: (city?: City) => void;
+  onChangeCity: (city?: CityId) => void;
   loading: boolean;
 }
 
 // Not entirely proud of the type conversions in this component
 // I could've used a Select library but I preferred to keep it as close to HTML as possible
 export const CitySelect: React.FC<Props> = ({ onChangeCity, loading }) => {
-  const [value, setValue] = useState<City | undefined>(undefined);
-  const handleSelectCity = (newCity?: City) => {
+  const [value, setValue] = useState<CityId | undefined>(undefined);
+  const handleSelectCity = (newCity?: CityId) => {
     onChangeCity(newCity);
     setValue(newCity);
   };
-  const eventValueToCity = (newValue: string): City | undefined => {
+  const eventValueToCity = (newValue: string): CityId | undefined => {
     if (newValue == "") return undefined;
-    return newValue as City;
+    return newValue as CityId;
   };
   return (
     <select
@@ -26,12 +26,12 @@ export const CitySelect: React.FC<Props> = ({ onChangeCity, loading }) => {
       disabled={loading}
     >
       <option value="">Ciudad actual</option>
-      {Object.keys(City).map((cityKey) => {
+      {Object.keys(CityId).map((cityKey) => {
         // see https://github.com/Microsoft/TypeScript/issues/28565 for the logic behind the enum key casting
-        const c = City[cityKey as keyof typeof City];
+        const c = CityId[cityKey as keyof typeof CityId];
         return (
           <option key={cityKey} value={c}>
-            {cityToName[c]}
+            {cityIdToName[c]}
           </option>
         );
       })}

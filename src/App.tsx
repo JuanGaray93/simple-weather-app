@@ -1,24 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { CitySelect } from "./CitySelect";
-import { AppState, City } from "./model";
-import { getCityData } from "./requests";
+import { AppError, AppState, CityId, errorToStr } from "./model";
+import { getLocationForecast } from "./requests";
 
 export const App: React.FC = () => {
   const [state, setState] = useState<AppState>({});
-  const isLoading = state.dataFetchState === undefined;
-  const hasError = state.dataFetchState === "error";
+  const isLoading = state.fetchedCity === undefined;
 
-  const loadCity = async (newCity?: City) => {
+  const loadCity = async (newCity?: CityId) => {
+    const location = newCity ?? state.userLocation;
     try {
-      const newCityData = await getCityData(newCity);
-      setState({ ...state, dataFetchState: newCityData, currCity: newCity });
+      if (!location) return;
+      const newCityData = await getLocationForecast(location);
+      setState({
+        ...state,
+        fetchedCity: newCityData,
+        currCityId: newCity,
+        error: undefined,
+      });
     } catch (error) {
-      setState({ ...state, dataFetchState: "error" });
+      setState({
+        ...state,
+        fetchedCity: undefined,
+        currCityId: undefined,
+        error: AppError.FetchingError,
+      });
     }
   };
 
   useEffect(() => {
-    loadCity();
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setState({
+          ...state,
+          userLocation: {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          },
+        });
+        loadCity();
+      },
+      () => {
+        setState({ ...state, error: AppError.NoPermissions });
+      }
+    );
   });
 
   return (
@@ -28,10 +53,8 @@ export const App: React.FC = () => {
         <section>
           <CitySelect onChangeCity={loadCity} loading={isLoading} />
           {isLoading && <span>Cargando...</span>}
-          {hasError && (
-            <span className="text-red">
-              Ocurrió un error. Inténtelo de nuevo.
-            </span>
+          {state.error && (
+            <span className="text-red">{errorToStr[state.error]}</span>
           )}
         </section>
       </main>
