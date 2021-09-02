@@ -12,6 +12,10 @@ export const App: React.FC = () => {
   const isLoading = state.fetchedCity === undefined;
 
   const loadCity = async (newCity?: CityId) => {
+    setState((state) => ({
+      ...state,
+      fetchedCity: undefined,
+    }));
     const location = newCity ?? state.userLocation;
     try {
       if (!location) return;
@@ -62,12 +66,14 @@ export const App: React.FC = () => {
             onChangeCity={(newCity) => setSelectedCity(newCity)}
             loading={isLoading}
           />
-          {isLoading && !state.error && <span>Cargando...</span>}
           {state.error && (
             <span className="text-red">{errorToStr[state.error]}</span>
           )}
         </section>
-        <section>{JSON.stringify(state.fetchedCity)}</section>
+        <section>
+          {isLoading && !state.error && <p>Cargando...</p>}
+          {JSON.stringify(state.fetchedCity)}
+        </section>
       </main>
     </div>
   );
