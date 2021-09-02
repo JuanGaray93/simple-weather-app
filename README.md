@@ -17,7 +17,7 @@ For development, be sure to set up ESLint as your default formatter in your text
 - ~~code results on state - error, weather, loading~~
 - ~~define happy path UI~~
 - ~~define environment variables~~
-- create api request
+- ~~create api request~~
 - integrate
 - document
 - code the design

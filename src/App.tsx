@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { CitySelect } from "./CitySelect";
+import { CityOption, CitySelect } from "./CitySelect";
 import { AppError, AppState, errorToStr } from "./model/app";
 import { CityId } from "./model/openWeather";
 import { getLocationForecast } from "./requests";
 
+const cityOptions: CityOption[] = ["", ...Object.values(CityId)];
+
 export const App: React.FC = () => {
   const [state, setState] = useState<AppState>({});
+  const [selectedCity, setSelectedCity] = useState<CityOption>("");
   const isLoading = state.fetchedCity === undefined;
 
   const loadCity = async (newCity?: CityId) => {
@@ -45,15 +48,20 @@ export const App: React.FC = () => {
           setState((state) => ({ ...state, error: AppError.NoPermissions }));
         }
       );
-    else loadCity();
-  }, [state.userLocation?.lat, state.userLocation?.lon]);
+    loadCity(selectedCity || undefined);
+  }, [state.userLocation?.lat, state.userLocation?.lon, selectedCity]);
 
   return (
     <div className="min-h-screen flex flex-col bg-lavenderWeb ">
       <h1 className="h-20 text-5xl bg-queenPink p-4">Weather</h1>
       <main className="p-4">
         <section>
-          <CitySelect onChangeCity={loadCity} loading={isLoading} />
+          <CitySelect
+            options={cityOptions}
+            currCity={selectedCity}
+            onChangeCity={(newCity) => setSelectedCity(newCity)}
+            loading={isLoading}
+          />
           {isLoading && !state.error && <span>Cargando...</span>}
           {state.error && (
             <span className="text-red">{errorToStr[state.error]}</span>

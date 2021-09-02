@@ -11,6 +11,9 @@ export enum CityId {
   SanFernando = "3429095",
 }
 
+export const isCityId = (val: unknown): val is CityId =>
+  Object.values(CityId).includes(val as CityId);
+
 export const cityIdToName: Record<CityId, string> = {
   [CityId.Glew]: "Glew",
   [CityId.Boulogne]: "Boulogne Sur Mer",
