@@ -1,3 +1,8 @@
+export interface Coordinates {
+  lat: number;
+  lon: number;
+}
+
 export enum CityId {
   Glew = "3433762",
   Boulogne = "3435971",
@@ -14,18 +19,35 @@ export const cityIdToName: Record<CityId, string> = {
   [CityId.SaoPaulo]: "São Paulo",
 };
 
-interface DayForecast {
+export const cityIdToCoordinates: Record<CityId, Coordinates> = {
+  [CityId.Glew]: { lon: -58.37764, lat: -34.89151 },
+  [CityId.Boulogne]: { lon: -58.565811, lat: -34.50732 },
+  [CityId.Caba]: { lon: -58.450001, lat: -34.599998 },
+  [CityId.SanFernando]: { lon: -58.56279, lat: -34.44104 },
+  [CityId.SaoPaulo]: { lon: -46.636108, lat: -23.547501 },
+};
+
+interface Weather {
+  id: number;
+  icon: string;
+}
+
+interface DayWeatherForecast {
+  weather: Weather;
   temp: {
     day: number;
     min: number;
     max: number;
   };
-  weather: {
-    id: number;
-    icon: string;
-  };
+}
+interface DayCurrentWeather {
+  weather: Weather;
+  temp: number;
 }
 
 export interface CityForecast {
-  list: DayForecast[];
+  lat: number;
+  lon: number;
+  current: DayCurrentWeather;
+  daily: DayWeatherForecast[];
 }

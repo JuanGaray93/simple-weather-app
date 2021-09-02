@@ -13,51 +13,53 @@ export const App: React.FC = () => {
     try {
       if (!location) return;
       const newCityData = await getLocationForecast(location);
-      setState({
+      setState((state) => ({
         ...state,
         fetchedCity: newCityData,
         currCityId: newCity,
         error: undefined,
-      });
+      }));
     } catch (error) {
-      setState({
+      setState((state) => ({
         ...state,
         fetchedCity: undefined,
         currCityId: undefined,
         error: AppError.FetchingError,
-      });
+      }));
     }
   };
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setState({
-          ...state,
-          userLocation: {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          },
-        });
-        loadCity();
-      },
-      () => {
-        setState({ ...state, error: AppError.NoPermissions });
-      }
-    );
-  });
+    if (state.userLocation === undefined)
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setState((state) => ({
+            ...state,
+            userLocation: {
+              lat: position.coords.latitude,
+              lon: position.coords.longitude,
+            },
+          }));
+        },
+        () => {
+          setState((state) => ({ ...state, error: AppError.NoPermissions }));
+        }
+      );
+    else loadCity();
+  }, [state.userLocation?.lat, state.userLocation?.lon]);
 
   return (
-    <div className="h-screen flex flex-col bg-lavenderWeb ">
+    <div className="min-h-screen flex flex-col bg-lavenderWeb ">
       <h1 className="h-20 text-5xl bg-queenPink p-4">Weather</h1>
       <main className="p-4">
         <section>
           <CitySelect onChangeCity={loadCity} loading={isLoading} />
-          {isLoading && <span>Cargando...</span>}
+          {isLoading && !state.error && <span>Cargando...</span>}
           {state.error && (
             <span className="text-red">{errorToStr[state.error]}</span>
           )}
         </section>
+        <section>{JSON.stringify(state.fetchedCity)}</section>
       </main>
     </div>
   );

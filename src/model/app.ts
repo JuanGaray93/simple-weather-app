@@ -1,4 +1,4 @@
-import { CityForecast, CityId } from "./openWeather";
+import { CityForecast, CityId, Coordinates } from "./openWeather";
 
 export enum AppError {
   NoPermissions,
@@ -10,11 +10,6 @@ export const errorToStr: Record<AppError, string> = {
     "Ocurrió un error al obtener el pronóstico. Inténtelo de nuevo.",
   [AppError.NoPermissions]: "La aplicación necesita acceder a su ubicación.",
 };
-
-export interface Coordinates {
-  lat: number;
-  lon: number;
-}
 
 export type LocationIdentifier = CityId | Coordinates;
 
