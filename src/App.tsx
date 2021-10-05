@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CityOption, CitySelect } from "./CitySelect";
-import { ForecastDetail } from "./ForecastDetail";
+import { CityForecastDetail } from "./CityForecastDetail/CityForecastDetail";
 import { AppError, AppState, errorToStr } from "./model/app";
 import { CityId } from "./model/openWeather";
 import { getLocationForecast } from "./requests";
@@ -73,7 +73,9 @@ export const App: React.FC = () => {
         </section>
         <section>
           {isLoading && !state.error && <p>Cargando...</p>}
-          {state.fetchedCity && <ForecastDetail forecast={state.fetchedCity} />}
+          {state.fetchedCity && (
+            <CityForecastDetail forecast={state.fetchedCity} />
+          )}
         </section>
       </main>
     </div>

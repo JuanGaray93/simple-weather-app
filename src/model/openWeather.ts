@@ -35,14 +35,16 @@ interface Weather {
   icon: string;
 }
 
-interface DayWeatherForecast {
+export interface DayWeatherForecast {
   weather: Weather;
   temp: {
     day: number;
     min: number;
     max: number;
   };
+  dt: number;
 }
+
 interface DayCurrentWeather {
   weather: Weather;
   temp: number;

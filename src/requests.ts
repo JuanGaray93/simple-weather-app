@@ -8,12 +8,12 @@ import {
   Coordinates,
 } from "./model/openWeather";
 
-const castEnvVarToStr = (apiKey?: string | boolean) => {
-  if (typeof apiKey === "boolean") return "";
-  return apiKey ?? "";
+const castStringEnvVarToStr = (envVar?: string | boolean) => {
+  if (typeof envVar === "boolean") return "";
+  return envVar ?? "";
 };
 
-const API_KEY: string = castEnvVarToStr(import.meta.env.VITE_WEATHER_API_KEY);
+const API_KEY: string = castStringEnvVarToStr(import.meta.env.VITE_WEATHER_API_KEY);
 const FORECAST_DAYS = 5;
 const BASE_OPENWEATHER_URL =
   "https://api.openweathermap.org/data/2.5/onecall?exclude=minutely,hourly,alerts&units=metric";

@@ -10,12 +10,12 @@ interface Props {
   loading: boolean;
 }
 
-const eventValueToCity = (newValue: string): CityId | undefined => {
+const eventValueToCityId = (newValue: string): CityId | undefined => {
   if (isCityId(newValue)) return newValue;
   return undefined;
 };
 
-const getCityValueAndName = (cityId: CityId | "") => [
+const getCityIdAndName = (cityId: CityId | "") => [
   cityId,
   isCityId(cityId) ? cityIdToName[cityId] : "Ciudad actual",
 ];
@@ -29,11 +29,11 @@ export const CitySelect: React.FC<Props> = ({
   return (
     <select
       value={currCity}
-      onChange={(e) => onChangeCity(eventValueToCity(e.target.value))}
+      onChange={(e) => onChangeCity(eventValueToCityId(e.target.value) ?? "")}
       name="cities"
       disabled={loading}
     >
-      {options.map(getCityValueAndName).map(([value, cityName]) => {
+      {options.map(getCityIdAndName).map(([value, cityName]) => {
         return (
           <option key={value} value={value}>
             {cityName}
