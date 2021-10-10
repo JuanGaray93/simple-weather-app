@@ -3,12 +3,6 @@ import { CityId, cityIdToName, isCityId } from "./model/openWeather";
 
 export type CityOption = CityId | "";
 
-interface Props {
-  options: CityOption[];
-  currCity: CityOption;
-  onChangeCity: (city: CityOption) => void;
-  loading: boolean;
-}
 
 const eventValueToCityId = (newValue: string): CityId | undefined => {
   if (isCityId(newValue)) return newValue;
@@ -20,11 +14,20 @@ const getCityIdAndName = (cityId: CityId | "") => [
   isCityId(cityId) ? cityIdToName[cityId] : "Ciudad actual",
 ];
 
+interface Props {
+  options: CityOption[];
+  currCity: CityOption;
+  onChangeCity: (city: CityOption) => void;
+  loading: boolean;
+  className?: string;
+}
+
 export const CitySelect: React.FC<Props> = ({
   options,
   currCity,
   onChangeCity,
   loading,
+  className
 }) => {
   return (
     <select
@@ -32,6 +35,7 @@ export const CitySelect: React.FC<Props> = ({
       onChange={(e) => onChangeCity(eventValueToCityId(e.target.value) ?? "")}
       name="cities"
       disabled={loading}
+      className={className}
     >
       {options.map(getCityIdAndName).map(([value, cityName]) => {
         return (

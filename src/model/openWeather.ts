@@ -30,13 +30,33 @@ export const cityIdToCoordinates: Record<CityId, Coordinates> = {
   [CityId.SaoPaulo]: { lon: -46.636108, lat: -23.547501 },
 };
 
+// https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+export const getWeatherTextById = (id: number): string => {
+  if(200 <= id && id <= 299 ) return "Tormenta";
+  if(300 <= id && id <= 399 ) return "Lluvia ligera";
+  if(500 <= id && id <= 599 ) return "Lluvia";
+  if(600 <= id && id <= 699 ) return "Nieve";
+  if(801 <= id && id <= 809 ) return "Nublado";
+  // Special cases
+  if(id === 800 ) return "Despejado";
+  if(id === 701) return "Niebla";
+  if(id === 711) return "Humo";
+  if(id === 721) return "Bruma";
+  if(id === 731 || id === 761) return "Polvo";
+  if(id === 741) return "Niebla espesa";
+  if(id === 751) return "Arena";
+  if(id === 771) return "Vendaval";
+  if(id === 781) return "Tornado";
+  return "";
+};
+
 interface Weather {
   id: number;
   icon: string;
 }
 
 export interface DayWeatherForecast {
-  weather: Weather;
+  weather: Weather[];
   temp: {
     day: number;
     min: number;
@@ -46,7 +66,7 @@ export interface DayWeatherForecast {
 }
 
 interface DayCurrentWeather {
-  weather: Weather;
+  weather: Weather[];
   temp: number;
 }
 

@@ -6,6 +6,12 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
+      white: {
+        DEFAULT: "#ffffff"
+      },
+      transparentBlack: {
+        DEFAULT: "#00000066",
+      },
       lavenderWeb: {
         DEFAULT: "#e7e6f7",
       },

@@ -1,6 +1,6 @@
 import React from "react";
 import { buildLocalDateByUnixTimestamp } from "../helpers/dateHelpers";
-import { CityForecast } from "../model/openWeather";
+import { CityForecast, getWeatherTextById } from "../model/openWeather";
 import { DailyCityForecast } from "./DailyCityForecast";
 
 interface Props {
@@ -12,8 +12,9 @@ export const CityForecastDetail: React.FC<Props> = ({ forecast }) => {
     <ol className="flex flex-wrap flex-row gap-10">
       <li>
         <DailyCityForecast
+          weatherDescription={getWeatherTextById(forecast.current.weather[0].id)}
           day="Hoy"
-          iconId={forecast.current.weather.icon}
+          iconId={forecast.current.weather[0].icon}
           temp={forecast.current.temp}
         />
       </li>
@@ -21,8 +22,9 @@ export const CityForecastDetail: React.FC<Props> = ({ forecast }) => {
         return (
           <li key={index}>
             <DailyCityForecast
+              weatherDescription={getWeatherTextById(df.weather[0].id)}
               day={buildLocalDateByUnixTimestamp(df.dt)}
-              iconId={df.weather.icon}
+              iconId={df.weather[0].icon}
               temp={df.temp.day}
             />
           </li>

@@ -66,6 +66,7 @@ export const App: React.FC = () => {
             currCity={selectedCity}
             onChangeCity={(newCity) => setSelectedCity(newCity)}
             loading={isLoading}
+            className="my-4"
           />
           {state.error && (
             <span className="text-red">{errorToStr[state.error]}</span>
