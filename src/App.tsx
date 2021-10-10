@@ -68,12 +68,12 @@ export const App: React.FC = () => {
             loading={isLoading}
             className="my-4"
           />
-          {state.error && (
-            <span className="text-red">{errorToStr[state.error]}</span>
-          )}
+          {state.error !== undefined ? (
+            <p className="text-red">{errorToStr[state.error]}</p>
+          ) : null}
         </section>
         <section>
-          {isLoading && !state.error && <p>Cargando...</p>}
+          {isLoading && state.error === undefined && <p>Cargando...</p>}
           {state.fetchedCity && (
             <CityForecastDetail forecast={state.fetchedCity} />
           )}

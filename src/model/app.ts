@@ -8,7 +8,7 @@ export enum AppError {
 export const errorToStr: Record<AppError, string> = {
   [AppError.FetchingError]:
     "Ocurrió un error al obtener el pronóstico. Inténtelo de nuevo.",
-  [AppError.NoPermissions]: "La aplicación necesita acceder a su ubicación.",
+  [AppError.NoPermissions]: "La aplicación necesita acceder a su ubicación. Revise los permisos de la página e intente de nuevo.",
 };
 
 export type LocationIdentifier = CityId | Coordinates;
